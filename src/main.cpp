@@ -38,6 +38,8 @@ int main() {
     oled->clearScreen();
     oled->displayText(OBD2_MAC, 10, 10);
     
+    bcm2835_delay(2500);
+
 
         // Lista de comandos AT a enviar
         std::vector<std::string> commands = {
@@ -54,8 +56,6 @@ int main() {
     } catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
-
-    bcm2835_delay(5000);
 
     return 0;
 }
