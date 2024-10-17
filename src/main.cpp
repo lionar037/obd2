@@ -36,10 +36,8 @@ int main() {
     oled->clearScreen();
     oled->displayText(elm327Address.c_str(), 10, 10);
     
-    bcm2835_delay(1500);
+    bcm2835_delay(900);
 
-    // Instancia del ELM327
-    auto elm327 { std::make_unique<ELM327_BLUETOOTH::ELM327>(elm327Address)};
 
         // Lista de comandos AT a enviar
         std::vector<std::string> commands = {
@@ -54,11 +52,12 @@ int main() {
         oled->displayText(it.c_str(), 10, 10);
         bcm2835_delay(600);
     }
+        // Instancia del ELM327
+    auto elm327 { std::make_unique<ELM327_BLUETOOTH::ELM327>(elm327Address)};
+
         // Ejecutar los comandos
         elm327->executeCommands(commands);
 
-
-    
     } catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
