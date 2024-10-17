@@ -53,6 +53,11 @@ int main() {
         // Ejecutar los comandos
         elm327.executeCommands(commands);
 
+    for(auto& it :commands){
+        oled->displayText(it.c_str(), 10, 10);
+        bcm2835_delay(600);
+    }
+    
     } catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
