@@ -31,8 +31,8 @@ namespace OLED{
         myOLED.OLEDbegin(i2c_speed_, i2c_address_, i2c_debug_);
         screenBuffer_ = new uint8_t[FULLSCREEN];
         myOLED.OLEDSetBufferPtr(width_, height_, screenBuffer_, FULLSCREEN);
-        myOLED.OLEDFillScreen(0xF0, 0);
-        bcm2835_delay(1000);
+        //myOLED.OLEDFillScreen(0xF0, 0);
+        bcm2835_delay(100);
 
         return true;
     }
