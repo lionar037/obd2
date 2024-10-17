@@ -26,11 +26,10 @@ int main() {
     try {
         // Dirección MAC del ELM327
         std::string elm327Address = OBD2_MAC ;  // Reemplaza con la MAC de tu dispositivo
-
-
-
-
-    std::unique_ptr<OLED::Oled_t> oled = std::make_unique<OLED::Oled_t>(128, 32, BCM2835_I2C_CLOCK_DIVIDER_626, 0x3C);
+        // Instancia del ELM327
+        ELM327_BLUETOOTH::ELM327 elm327(elm327Address);
+        // inicializa Oled
+        std::unique_ptr<OLED::Oled_t> oled = std::make_unique<OLED::Oled_t>(128, 32, BCM2835_I2C_CLOCK_DIVIDER_626, 0x3C);
 
     if (!oled->begin()) {
         return -1;
@@ -38,11 +37,7 @@ int main() {
 
     oled->clearScreen();
     oled->displayText(OBD2_MAC, 10, 10);
-    bcm2835_delay(5000);
-
-
-        // Instancia del ELM327
-        ELM327_BLUETOOTH::ELM327 elm327(elm327Address);
+    
 
         // Lista de comandos AT a enviar
         std::vector<std::string> commands = {
@@ -59,6 +54,8 @@ int main() {
     } catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
+
+    bcm2835_delay(5000);
 
     return 0;
 }
