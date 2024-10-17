@@ -49,6 +49,7 @@ int main() {
         };
 
     for(auto& it :commands){
+        oled->clearScreen();
         oled->displayText(it.c_str(), 10, 10);
         bcm2835_delay(600);
     }
