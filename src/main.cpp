@@ -50,13 +50,14 @@ int main() {
             "0100"      // Consultar PIDs soportados
         };
 
-        // Ejecutar los comandos
-        elm327.executeCommands(commands);
-
     for(auto& it :commands){
         oled->displayText(it.c_str(), 10, 10);
         bcm2835_delay(600);
     }
+        // Ejecutar los comandos
+        elm327.executeCommands(commands);
+
+
     
     } catch (const std::runtime_error& e) {
         std::cerr << "Error: " << e.what() << std::endl;
